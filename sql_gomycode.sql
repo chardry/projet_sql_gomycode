@@ -1,31 +1,31 @@
 
--- Création d'une Base de données
+-- CrÃ©ation d'une Base de donnÃ©es
 CREATE DATABASE Gomycode;
 
--- Sélection de la Base Gomycode
+-- SÃ©lection de la Base Gomycode
 use Gomycode;
 
--- Création de la table Customers
+-- CrÃ©ation de la table Customers
 CREATE TABLE Customers(
 	customer_id int identity(1,1),
 	name varchar(50),
 	address varchar(50)
 	);
 
--- Ajout de la clé primaire
+-- Ajout de la clÃ© primaire
 ALTER TABLE Customers ADD CONSTRAINT pk_customer PRIMARY KEY(customer_id);
 
--- Création de la Table Products
+-- CrÃ©ation de la Table Products
 CREATE TABLE Products(
 	product_id INT IDENTITY(1,1),
 	name VARCHAR(100),
-	price money
+	price decimal CHECK (price > 0)
 	);
 
--- Ajout de la clé primaire
+-- Ajout de la clÃ© primaire
 ALTER TABLE Products ADD CONSTRAINT pk_product PRIMARY KEY(product_id);
 
--- Création de la Table Orders
+-- CrÃ©ation de la Table Orders
 CREATE TABLE Orders(
 	orders_id INT IDENTITY(1,1),
 	customer_id INT,
@@ -34,7 +34,7 @@ CREATE TABLE Orders(
 	orders_date date
 	);
 
--- Ajout des contraintes Clés primaire et étrangère
+-- Ajout des contraintes ClÃ©s primaire et Ã©trangÃ¨re
 ALTER TABLE Orders ADD CONSTRAINT pk_orders PRIMARY KEY(orders_id);
 ALTER TABLE Orders ADD CONSTRAINT fk_customer_order FOREIGN KEY(customer_id) REFERENCES Customers(customer_id);
 ALTER TABLE Orders ADD CONSTRAINT fk_product_order FOREIGN KEY(product_id) REFERENCES Products(product_id);
